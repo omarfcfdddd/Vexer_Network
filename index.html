@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Vexer Network | الموقع الرسمي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap');
+
+        body {
+            background: #0a0c0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* خلفية متحركة */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(145deg, #0c0f15 0%, #1a1e2b 100%);
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 12, 15, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #ff7b00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, #ff7b00);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #ffd700;
+        }
+
+        .right-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* الصفحات */
+        .page {
+            min-height: 100vh;
+            padding-top: 100px;
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffd700, #ff6b6b, #a55cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 5s ease infinite;
+            background-size: 300% 300%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero p {
+            text-align: center;
+            color: #b0b0b0;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* صناديق المعلومات */
+        .server-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            background: rgba(20, 22, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            min-width: 350px;
+            flex: 1;
+            max-width: 450px;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 0.8rem;
+        }
+
+        .ip-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .ip-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+
+        .port-badge {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .copy-btn {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            width: fit-content;
+        }
+
+        .copy-btn:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+        }
+
+        .status-dot.online {
+            background: #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.offline {
+            background: #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .status-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .status-text.online {
+            color: #00ff00;
+        }
+
+        .status-text.offline {
+            color: #ff0000;
+        }
+
+        .players-count {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ff7b00);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        /* صفحة المتجر */
+        .store-header {
+            text-align: center;
+            padding: 3rem 5% 2rem;
+        }
+
+        .store-header h1 {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .store-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: linear-gradient(45deg, #ffd700, #ff7b00);
+            color: #000;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(20, 22, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 30px;
+            padding: 2rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .product-card.vexer-rank {
+            border: 2px solid #ff0000;
+        }
+
+        .product-card.vexer-plus {
+            border: 2px solid #00ff88;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffd700;
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #ffd700;
+        }
+
+        .product-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffd700;
+            margin: 1rem 0;
+        }
+
+        .product-price small {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: right;
+        }
+
+        .product-features li {
+            margin: 0.8rem 0;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-features i {
+            color: #ffd700;
+            width: 20px;
+        }
+
+        .buy-product {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ff7b00);
+            color: #000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #ffd700;
+        }
+
+        .item-type {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        /* صفحة القوانين */
+        .rules-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .rules-header h1 {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .rule-card {
+            background: rgba(20, 22, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 25px;
+            padding: 2rem;
+            transition: 0.3s;
+        }
+
+        .rule-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .rule-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .rule-card h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .rule-card p {
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        /* صفحة الإدارة */
+        .staff-section {
+            padding: 3rem 5%;
+        }
+
+        .staff-title {
+            text-align: center;
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 3rem;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .staff-card {
+            background: rgba(20, 22, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .staff-card:hover {
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .staff-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+        }
+
+        .staff-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .staff-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-role {
+            color: #b0b0b0;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        /* الفوتر */
+        footer {
+            background: #07090e;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .info-box {
+                min-width: 100%;
+            }
+
+            .ip-text {
+                font-size: 1.4rem;
+            }
+
+            .store-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .staff-title {
+                font-size: 2.5rem;
+            }
+
+            .rules-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="logo" onclick="showPage('home')">VEXER NETWORK</div>
+        <div class="nav-links">
+            <a onclick="showPage('home'); return false;" class="active" id="nav-home" data-translate="home">الرئيسية</a>
+            <a onclick="showPage('store'); return false;" id="nav-store" data-translate="store">المتجر</a>
+            <a onclick="showPage('rules'); return false;" id="nav-rules" data-translate="rules">القوانين</a>
+            <a onclick="showPage('staff'); return false;" id="nav-staff" data-translate="staff">الإدارة</a>
+        </div>
+        <div class="right-buttons">
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i>
+                <span id="lang-text">EN</span>
+            </button>
+            <a href="https://discord.gg/cGkBvMZcGS" target="_blank" class="discord-btn">
+                <i class="fab fa-discord"></i> <span data-translate="discord">الديسكورد</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>
+                    <span class="gradient-text">VEXER NETWORK</span>
+                </h1>
+                <p data-translate="homeTitle">🔥 أقوى سيرفر ماينكرافت عربي | تجربة لا تنسى مع مجتمعنا النشط</p>
+                
+                <div class="server-info">
+                    <!-- صندوق IP -->
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-server"></i>
+                            <span data-translate="ipLabel">IP السيرفر</span>
+                        </div>
+                        <div class="ip-container">
+                            <span class="ip-text">Soon...</span>
+                            <span class="port-badge">:25565</span>
+                            <button class="copy-btn" onclick="copyFullAddress()">
+                                <i class="fas fa-copy"></i> <span data-translate="copy">نسخ</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- صندوق الحالة -->
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-signal"></i>
+                            <span data-translate="status">حالة السيرفر</span>
+                        </div>
+                        <div class="status-container">
+                            <div class="status-indicator">
+                                <span class="status-dot" id="statusDot"></span>
+                                <span class="status-text" id="statusText" data-translate="loading">جاري التحميل...</span>
+                            </div>
+                            <div class="players-count" id="playersCount">
+                                <i class="fas fa-users"></i>
+                                <span id="playersNumber">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a onclick="showPage('store'); return false;" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> <span data-translate="shopNow">تسوق الآن</span>
+                    </a>
+                    <a href="https://discord.gg/cGkBvMZcGS" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-discord"></i> <span data-translate="joinDiscord">انضم للديسكورد</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- صفحة المتجر -->
+    <div id="store-page" class="page">
+        <div class="store-header">
+            <h1><span data-translate="storeTitle">🛒 المتجر الرسمي</span></h1>
+            <p data-translate="storeDesc">اشترِ الرتب والأدوات المميزة لدعم السيرفر</p>
+        </div>
+
+        <div class="store-categories">
+            <button class="category-btn active" onclick="filterStore('all')" data-translate="all">الكل</button>
+            <button class="category-btn" onclick="filterStore('ranks')" data-translate="ranks">الرتب</button>
+            <button class="category-btn" onclick="filterStore('tools')" data-translate="tools">الأدوات</button>
+        </div>
+
+        <div class="store-grid">
+            <!-- Vexer Rank -->
+            <div class="product-card vexer-rank" data-category="ranks">
+                <div class="product-badge" data-translate="exclusive">✨ حصرية</div>
+                <div class="product-icon">👑</div>
+                <span class="item-type" data-translate="specialRank">رتبة خاصة</span>
+                <h3>VEXER</h3>
+                <div class="product-price">$49.99 <small data-translate="monthly">شهرياً</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-crown"></i> <span data-translate="feat1">كل مميزات ELITE</span></li>
+                    <li><i class="fas fa-gem"></i> <span data-translate="feat2">50 صندوق شهرياً</span></li>
+                    <li><i class="fas fa-fire"></i> <span data-translate="feat3">تأثيرات نار حول اللاعب</span></li>
+                    <li><i class="fas fa-star"></i> <span data-translate="feat4">لقب خاص [VEXER]</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('VEXER')"><span data-translate="buy">شراء الرتبة</span></button>
+            </div>
+
+            <!-- Vexer+ Rank -->
+            <div class="product-card vexer-plus" data-category="ranks">
+                <div class="product-badge" data-translate="legendary">👑 الأسطورية</div>
+                <div class="product-icon">⚡</div>
+                <span class="item-type" data-translate="specialPlus">رتبة خاصة +</span>
+                <h3>VEXER+</h3>
+                <div class="product-price">$99.99 <small data-translate="monthly">شهرياً</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-crown"></i> <span data-translate="plusFeat1">كل مميزات VEXER</span></li>
+                    <li><i class="fas fa-gem"></i> <span data-translate="plusFeat2">100 صندوق شهرياً</span></li>
+                    <li><i class="fas fa-bolt"></i> <span data-translate="plusFeat3">برق حول اللاعب</span></li>
+                    <li><i class="fas fa-dragon"></i> <span data-translate="plusFeat4">تنين أليف حصري</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('VEXER+')"><span data-translate="buy">شراء الرتبة</span></button>
+            </div>
+
+            <!-- VIP Rank -->
+            <div class="product-card" data-category="ranks">
+                <div class="product-icon">⚡</div>
+                <span class="item-type" data-translate="rank">رتبة</span>
+                <h3>VIP</h3>
+                <div class="product-price">$9.99 <small data-translate="monthly">شهرياً</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> <span data-translate="vipFeat1">لقب VIP</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="vipFeat2">5 صناديق شهرية</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="vipFeat3">دخول أولوي</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="vipFeat4">أمر /fly (آمنة)</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('VIP')"><span data-translate="buyRank">شراء الرتبة</span></button>
+            </div>
+
+            <!-- MVP Rank -->
+            <div class="product-card" data-category="ranks">
+                <div class="product-icon">💎</div>
+                <span class="item-type" data-translate="rank">رتبة</span>
+                <h3>MVP</h3>
+                <div class="product-price">$19.99 <small data-translate="monthly">شهرياً</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> <span data-translate="mvpFeat1">كل مميزات VIP</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="mvpFeat2">15 صندوق شهرياً</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="mvpFeat3">تغيير لون الإسم</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="mvpFeat4">أمر /fly (كل العوالم)</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('MVP')"><span data-translate="buyRank">شراء الرتبة</span></button>
+            </div>
+
+            <!-- ELITE Rank -->
+            <div class="product-card" data-category="ranks">
+                <div class="product-icon">👑</div>
+                <span class="item-type" data-translate="rank">رتبة</span>
+                <h3>ELITE</h3>
+                <div class="product-price">$34.99 <small data-translate="monthly">شهرياً</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> <span data-translate="eliteFeat1">كل مميزات MVP</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="eliteFeat2">30 صندوق شهرياً</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="eliteFeat3">تأثيرات دخول</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="eliteFeat4">شوب خاص</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('ELITE')"><span data-translate="buyRank">شراء الرتبة</span></button>
+            </div>
+
+            <!-- Drill -->
+            <div class="product-card" data-category="tools">
+                <div class="product-icon">⛏️</div>
+                <span class="item-type" data-translate="tool">أداة</span>
+                <h3>Drill</h3>
+                <div class="product-price">$14.99 <small data-translate="permanent">دائم</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> <span data-translate="drillFeat1">دريل ماسي +10</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="drillFeat2">فورتشون 5</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="drillFeat3">هاست 3</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="drillFeat4">لمعة ذهبية</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('Drill')"><span data-translate="buyTool">شراء الأداة</span></button>
+            </div>
+
+            <!-- Diamond Axe -->
+            <div class="product-card" data-category="tools">
+                <div class="product-icon">⛏️</div>
+                <span class="item-type" data-translate="tool">أداة</span>
+                <h3><span data-translate="diamondAxe">فأس الماس</span></h3>
+                <div class="product-price">$4.99 <small data-translate="permanent">دائم</small></div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> <span data-translate="axeFeat1">فأس ماسي +5</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="axeFeat2">فورتشون 3</span></li>
+                    <li><i class="fas fa-check"></i> <span data-translate="axeFeat3">لمعة خضراء</span></li>
+                </ul>
+                <button class="buy-product" onclick="buyProduct('Diamond Axe')"><span data-translate="buyTool">شراء الأداة</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة القوانين -->
+    <div id="rules-page" class="page">
+        <div class="rules-container">
+            <div class="rules-header">
+                <h1 data-translate="rulesTitle">📜 القوانين</h1>
+                <p data-translate="rulesSubtitle">قوانين سيرفر Vexer Network</p>
+            </div>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-heart"></i></div>
+                    <h3 data-translate="rule1Title">احترام الجميع</h3>
+                    <p data-translate="rule1Desc">ممنوع الإهانة أو السب أو التمييز بين الأشخاص، كل شخص له حق الكلام بحرية ضمن الأدب.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-ban"></i></div>
+                    <h3 data-translate="rule2Title">ممنوع السبام</h3>
+                    <p data-translate="rule2Desc">لا ترسل رسائل متكررة، روابط عشوائية، أو إعلان غير مصرح به.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 data-translate="rule3Title">المحتوى المناسب</h3>
+                    <p data-translate="rule3Desc">ممنوع نشر محتوى غير لائق، عنيف، أو أي روابط خبيثة.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-lock"></i></div>
+                    <h3 data-translate="rule4Title">احترام الخصوصية</h3>
+                    <p data-translate="rule4Desc">ممنوع مشاركة أي معلومات شخصية لأحد بدون إذنه.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-comments"></i></div>
+                    <h3 data-translate="rule5Title">استخدام القنوات بشكل صحيح</h3>
+                    <p data-translate="rule5Desc">كل قناة لها غرضها، استخدم القناة المناسبة للموضوع.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon"><i class="fas fa-store-alt"></i></div>
+                    <h3 data-translate="rule6Title">عدم الترويج بدون إذن</h3>
+                    <p data-translate="rule6Desc">لا تروج لسيرفرات أو مواقع أو منتجات دون موافقة الإدارة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة الإدارة -->
+    <div id="staff-page" class="page">
+        <div class="staff-section">
+            <h2 class="staff-title" data-translate="staffTitle">👥 فريق الإدارة</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/F8WJMMN__v.png" alt="SHADOW">
+                    </div>
+                    <div class="staff-name">SHADOW</div>
+                    <div class="staff-role" data-translate="ownerShip">Owner Ship</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/0HgciAGiKW.png" alt="Yuli">
+                    </div>
+                    <div class="staff-name">Yuli</div>
+                    <div class="staff-role" data-translate="owner">Owner</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/kytHx3AFqc.png" alt="Dark Shadow">
+                    </div>
+                    <div class="staff-name">Dark Shadow</div>
+                    <div class="staff-role" data-translate="programmer">Programmer</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/er4-Pi8ur8.png" alt="M">
+                    </div>
+                    <div class="staff-name">M</div>
+                    <div class="staff-role" data-translate="headManager">Head Manger</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/cVCmRVkAki.png" alt="MoRo DeV">
+                    </div>
+                    <div class="staff-name">𝗠𝗼R̶o̶ 𝐃e̶𝐕</div>
+                    <div class="staff-role" data-translate="developer">Developer</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/MFREgs8Mnb.png" alt="dex.x">
+                    </div>
+                    <div class="staff-name">dex.x</div>
+                    <div class="staff-role" data-translate="developer">Developer</div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="https://i.thteam.me/H3ZsrjG_Pb.png" alt="Ahmed">
+                    </div>
+                    <div class="staff-name">⋆𝚅𝚡⋆╰➤𝒜𝒽𝓂ℯ𝒹8284</div>
+                    <div class="staff-role" data-translate="trailManager">Trail Manger</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="https://discord.gg/cGkBvMZcGS" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>© 2024 Vexer Network. <span data-translate="rights">جميع الحقوق محفوظة</span></p>
+        <p style="color: #444; font-size: 0.9rem;" data-translate="trademark">ماينكرافت علامة تجارية لشركة Mojang AB</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // إعدادات الخلفية
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 50 },
+                color: { value: '#ffd700' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.3 },
+                size: { value: 2 },
+                line_linked: { enable: true, distance: 150, color: '#ffd700', opacity: 0.1 },
+                move: { enable: true, speed: 1 }
+            }
+        });
+
+        // متغيرات اللغة
+        let currentLang = 'ar';
+        
+        // جميع ترجمات الموقع
+        const translations = {
+            ar: {
+                home: 'الرئيسية',
+                store: 'المتجر',
+                rules: 'القوانين',
+                staff: 'الإدارة',
+                discord: 'الديسكورد',
+                homeTitle: '🔥 أقوى سيرفر ماينكرافت عربي | تجربة لا تنسى مع مجتمعنا النشط',
+                shopNow: 'تسوق الآن',
+                joinDiscord: 'انضم للديسكورد',
+                ipLabel: 'IP السيرفر',
+                copy: 'نسخ',
+                status: 'حالة السيرفر',
+                loading: 'جاري التحميل...',
+                online: 'متصل',
+                offline: 'غير متصل',
+                storeTitle: '🛒 المتجر الرسمي',
+                storeDesc: 'اشترِ الرتب والأدوات المميزة لدعم السيرفر',
+                all: 'الكل',
+                ranks: 'الرتب',
+                tools: 'الأدوات',
+                exclusive: '✨ حصرية',
+                legendary: '👑 الأسطورية',
+                specialRank: 'رتبة خاصة',
+                specialPlus: 'رتبة خاصة +',
+                rank: 'رتبة',
+                tool: 'أداة',
+                monthly: 'شهرياً',
+                permanent: 'دائم',
+                buy: 'شراء',
+                buyRank: 'شراء الرتبة',
+                buyTool: 'شراء الأداة',
+                diamondAxe: 'فأس الماس',
+                feat1: 'كل مميزات ELITE',
+                feat2: '50 صندوق شهرياً',
+                feat3: 'تأثيرات نار حول اللاعب',
+                feat4: 'لقب خاص [VEXER]',
+                plusFeat1: 'كل مميزات VEXER',
+                plusFeat2: '100 صندوق شهرياً',
+                plusFeat3: 'برق حول اللاعب',
+                plusFeat4: 'تنين أليف حصري',
+                vipFeat1: 'لقب VIP',
+                vipFeat2: '5 صناديق شهرية',
+                vipFeat3: 'دخول أولوي',
+                vipFeat4: 'أمر /fly (آمنة)',
+                mvpFeat1: 'كل مميزات VIP',
+                mvpFeat2: '15 صندوق شهرياً',
+                mvpFeat3: 'تغيير لون الإسم',
+                mvpFeat4: 'أمر /fly (كل العوالم)',
+                eliteFeat1: 'كل مميزات MVP',
+                eliteFeat2: '30 صندوق شهرياً',
+                eliteFeat3: 'تأثيرات دخول',
+                eliteFeat4: 'شوب خاص',
+                drillFeat1: 'دريل ماسي +10',
+                drillFeat2: 'فورتشون 5',
+                drillFeat3: 'هاست 3',
+                drillFeat4: 'لمعة ذهبية',
+                axeFeat1: 'فأس ماسي +5',
+                axeFeat2: 'فورتشون 3',
+                axeFeat3: 'لمعة خضراء',
+                rulesTitle: '📜 القوانين',
+                rulesSubtitle: 'قوانين سيرفر Vexer Network',
+                rule1Title: 'احترام الجميع',
+                rule1Desc: 'ممنوع الإهانة أو السب أو التمييز بين الأشخاص، كل شخص له حق الكلام بحرية ضمن الأدب.',
+                rule2Title: 'ممنوع السبام',
+                rule2Desc: 'لا ترسل رسائل متكررة، روابط عشوائية، أو إعلان غير مصرح به.',
+                rule3Title: 'المحتوى المناسب',
+                rule3Desc: 'ممنوع نشر محتوى غير لائق، عنيف، أو أي روابط خبيثة.',
+                rule4Title: 'احترام الخصوصية',
+                rule4Desc: 'ممنوع مشاركة أي معلومات شخصية لأحد بدون إذنه.',
+                rule5Title: 'استخدام القنوات بشكل صحيح',
+                rule5Desc: 'كل قناة لها غرضها، استخدم القناة المناسبة للموضوع.',
+                rule6Title: 'عدم الترويج بدون إذن',
+                rule6Desc: 'لا تروج لسيرفرات أو مواقع أو منتجات دون موافقة الإدارة.',
+                staffTitle: '👥 فريق الإدارة',
+                ownerShip: 'Owner Ship',
+                owner: 'Owner',
+                programmer: 'Programmer',
+                headManager: 'Head Manger',
+                developer: 'Developer',
+                trailManager: 'Trail Manger',
+                rights: 'جميع الحقوق محفوظة',
+                trademark: 'ماينكرافت علامة تجارية لشركة Mojang AB'
+            },
+            en: {
+                home: 'Home',
+                store: 'Store',
+                rules: 'Rules',
+                staff: 'Staff',
+                discord: 'Discord',
+                homeTitle: '🔥 Best Arabic Minecraft Server | Unforgettable experience with our active community',
+                shopNow: 'Shop Now',
+                joinDiscord: 'Join Discord',
+                ipLabel: 'Server IP',
+                copy: 'Copy',
+                status: 'Server Status',
+                loading: 'Loading...',
+                online: 'Online',
+                offline: 'Offline',
+                storeTitle: '🛒 Official Store',
+                storeDesc: 'Buy ranks and special items to support the server',
+                all: 'All',
+                ranks: 'Ranks',
+                tools: 'Tools',
+                exclusive: '✨ Exclusive',
+                legendary: '👑 Legendary',
+                specialRank: 'Special Rank',
+                specialPlus: 'Special Rank +',
+                rank: 'Rank',
+                tool: 'Tool',
+                monthly: 'monthly',
+                permanent: 'permanent',
+                buy: 'Buy',
+                buyRank: 'Buy Rank',
+                buyTool: 'Buy Tool',
+                diamondAxe: 'Diamond Axe',
+                feat1: 'All ELITE features',
+                feat2: '50 monthly crates',
+                feat3: 'Fire effects around player',
+                feat4: 'Special tag [VEXER]',
+                plusFeat1: 'All VEXER features',
+                plusFeat2: '100 monthly crates',
+                plusFeat3: 'Lightning around player',
+                plusFeat4: 'Exclusive dragon pet',
+                vipFeat1: 'VIP tag',
+                vipFeat2: '5 monthly crates',
+                vipFeat3: 'Priority join',
+                vipFeat4: '/fly command (safe zones)',
+                mvpFeat1: 'All VIP features',
+                mvpFeat2: '15 monthly crates',
+                mvpFeat3: 'Name color change',
+                mvpFeat4: '/fly command (all worlds)',
+                eliteFeat1: 'All MVP features',
+                eliteFeat2: '30 monthly crates',
+                eliteFeat3: 'Join effects',
+                eliteFeat4: 'Special shop',
+                drillFeat1: 'Diamond Drill +10',
+                drillFeat2: 'Fortune 5',
+                drillFeat3: 'Haste 3',
+                drillFeat4: 'Golden glow',
+                axeFeat1: 'Diamond Axe +5',
+                axeFeat2: 'Fortune 3',
+                axeFeat3: 'Green glow',
+                rulesTitle: '📜 Rules',
+                rulesSubtitle: 'Vexer Network Server Rules',
+                rule1Title: 'Respect Everyone',
+                rule1Desc: 'No insults, swearing, or discrimination. Everyone has the right to speak freely within the boundaries of politeness.',
+                rule2Title: 'No Spam',
+                rule2Desc: 'Do not send repeated messages, random links, or unauthorized advertising.',
+                rule3Title: 'Appropriate Content',
+                rule3Desc: 'No inappropriate, violent content, or malicious links.',
+                rule4Title: 'Respect Privacy',
+                rule4Desc: 'Do not share anyone\'s personal information without permission.',
+                rule5Title: 'Proper Channel Usage',
+                rule5Desc: 'Each channel has its purpose, use the appropriate channel for the topic.',
+                rule6Title: 'No Advertising',
+                rule6Desc: 'Do not promote servers, websites, or products without staff permission.',
+                staffTitle: '👥 Staff Team',
+                ownerShip: 'Owner Ship',
+                owner: 'Owner',
+                programmer: 'Programmer',
+                headManager: 'Head Manger',
+                developer: 'Developer',
+                trailManager: 'Trail Manger',
+                rights: 'All Rights Reserved',
+                trademark: 'Minecraft is a trademark of Mojang AB'
+            }
+        };
+
+        // تغيير اللغة
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            // تغيير اتجاه الصفحة
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            
+            // تغيير نص زر اللغة
+            document.getElementById('lang-text').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+            
+            // ترجمة كل العناصر
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // تحديث عنوان الصفحة
+            document.title = currentLang === 'ar' ? 'Vexer Network | الموقع الرسمي' : 'Vexer Network | Official Website';
+            
+            // تحديث نص الحالة إذا كان السيرفر متصل أو لا
+            updateStatusText();
+        }
+
+        // تحديث نص الحالة حسب اللغة
+        function updateStatusText() {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            
+            if (statusDot.classList.contains('online')) {
+                statusText.textContent = translations[currentLang].online;
+            } else if (statusDot.classList.contains('offline')) {
+                statusText.textContent = translations[currentLang].offline;
+            }
+        }
+
+        // نسخ العنوان
+        function copyFullAddress() {
+            navigator.clipboard.writeText('Soon...:Soon...').then(() => {
+                alert(currentLang === 'ar' ? '✅ تم نسخ عنوان السيرفر!' : '✅ Server address copied!');
+            });
+        }
+
+        // جلب حالة السيرفر
+        async function fetchServerStatus() {
+            try {
+                const response = await fetch('https://api.mcsrvstat.us/2/Soon...');
+                const data = await response.json();
+                
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                const playersNumber = document.getElementById('playersNumber');
+                
+                if (data.online) {
+                    statusDot.className = 'status-dot online';
+                    statusText.className = 'status-text online';
+                    statusText.textContent = translations[currentLang].online;
+                    playersNumber.textContent = data.players.online || 0;
+                } else {
+                    statusDot.className = 'status-dot offline';
+                    statusText.className = 'status-text offline';
+                    statusText.textContent = translations[currentLang].offline;
+                    playersNumber.textContent = '0';
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        setInterval(fetchServerStatus, 5000);
+        fetchServerStatus();
+
+        // التنقل بين الصفحات
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageName + '-page').classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            document.getElementById('nav-' + pageName).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // تصفية المتجر
+        function filterStore(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.product-card').forEach(product => {
+                product.style.display = (category === 'all' || product.dataset.category === category) ? 'block' : 'none';
+            });
+        }
+
+        function buyProduct(name) {
+            alert(currentLang === 'ar' ? `✅ تمت إضافة ${name} إلى سلة الشراء!` : `✅ ${name} added to cart!`);
+        }
+    </script>
+</body>
+</html>
